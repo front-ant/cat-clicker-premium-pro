@@ -1,10 +1,10 @@
 .clicker-container {
-  display: flex;
+  display: block;
 }
 
 .cat-container {
   display: flex;
-  width: 50%;
+  width: 100%;
 }
 
 .counter {
@@ -12,6 +12,12 @@
   margin: auto;
 }
 
-.hero-image {
+.cat-image {
   margin: auto;
+}
+
+.individual-cat {
+  display: flex;
+  flex-wrap: wrap;
+
 }
