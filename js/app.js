@@ -1,5 +1,25 @@
 $(function() {
 
+  const cats = [
+  {
+    name: 'Tubbs',
+    src: 'img/tubbs.jpg'
+  },
+  {
+    name: 'Peaches',
+    src: 'img/peaches.jpg'
+  }
+  ]
+
+
+$('.name').each(function(index) {
+    $(this).text(function() {
+      for (cat in cats) {
+        return cats[index].name;
+        index += 1;
+      }
+    });
+  });
 
 
 $(".individual-cat").click(function(event) {
@@ -9,21 +29,5 @@ $(".individual-cat").click(function(event) {
     let newCounterValue = counterValue + 1;
     return newCounterValue;
   });
-
-  })
-
-})
-
-
-
-
-class Cat {
-  constructor(name, src) {
-    this.name = name;
-    this.src = src;
-  }
-
-}
-
-
-//end document ready
+});
+});
