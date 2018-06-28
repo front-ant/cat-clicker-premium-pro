@@ -1,0 +1,17 @@
+.clicker-container {
+  display: flex;
+}
+
+.cat-container {
+  display: flex;
+  width: 50%;
+}
+
+.counter {
+  width: 50%;
+  margin: auto;
+}
+
+.hero-image {
+  margin: auto;
+}
