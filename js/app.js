@@ -1,16 +1,46 @@
+const catNames = [
+  'Tubbs',
+  'Peaches',
+  'Sapphire',
+  'Jeeves',
+  'Cafe'
+];
+
+
 $(function() {
 
   const cats = [
   {
     name: 'Tubbs',
-    src: 'img/tubbs.jpg'
+    src: 'img/tubbs.jpg',
+    clicks: 0
   },
   {
     name: 'Peaches',
-    src: 'img/peaches.jpg'
+    src: 'img/peaches.jpg',
+    clicks: 0
+  },
+  {
+    name: 'Sapphire',
+    src: 'img/sapphire.jpg',
+    clicks: 0
+  },
+  {
+    name: 'Jeeves',
+    src: 'img/jeeves.jpg',
+    clicks: 0
+  },
+  {
+    name: 'Cafe',
+    src: 'img/cafe.jpg',
+    clicks: 0
   }
-  ]
+];
 
+//Create content for catPicker menu
+for (const catName of catNames) {
+  $('.catPicker').append(`<li>${catName}</li>`);
+}
 
 $('.name').each(function(index) {
     $(this).text(function() {

@@ -1,10 +1,16 @@
-.clicker-container {
-  display: block;
+main {
+  display: flex;
 }
 
 .cat-container {
-  display: flex;
-  width: 100%;
+  display: block;
+  width: 80%;
+  border: 1px solid black;
+  height: 300px;
+}
+
+.catPicker {
+  width: 20%;
 }
 
 .counter {
