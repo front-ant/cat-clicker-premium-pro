@@ -13,7 +13,7 @@ $(function() {
 
 //Create content for catPicker menu
 for (const catName of catNames) {
-  $('.catPicker').append(`<li>${catName}</li>`);
+  $('.catPicker').append(`<li class='catName'>${catName}</li>`);
 }
 
 Cat = class Cat {
@@ -22,11 +22,21 @@ Cat = class Cat {
   }
 
   display() {
-    $('.cat-container').append(this.name);
+    $('.cat-container').html(this.name);
   }
 }
 
 
+
+//event listener for menu clicks
+
+$('.catName').click(function(event) {
+  if (event.target.nodeName === 'LI') {
+    let displayedCat = new Cat($(this).text());
+    displayedCat.display();
+
+  }
+});
 
 
 
