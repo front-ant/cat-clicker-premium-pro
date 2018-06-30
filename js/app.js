@@ -22,7 +22,10 @@ Cat = class Cat {
   }
 
   display() {
-    $('.cat-container').html(this.name);
+    $('.cat-container').html(
+      this.name +
+      `<img src='img\\${this.name}.jpg' height="300">`
+    );
   }
 }
 
