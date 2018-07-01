@@ -1,4 +1,4 @@
-const catNames = [
+let catNames = [
   'Tubbs',
   'Peaches',
   'Sapphire',
@@ -7,7 +7,7 @@ const catNames = [
 ];
 
 let Cat = '';
-let constructedCats = [];
+let constructedCats = new Map();
 
 //when DOM is ready:
 $(function() {
@@ -23,7 +23,7 @@ Cat = class Cat {
     $('.cat-container').html(
       this.name +
       `<img src='img\\${this.name}.jpg' height="300">` +
-      `Clicked ${this.clicked} times`
+      `Click Count: ${this.clicked}`
     );
   }
 
@@ -36,9 +36,8 @@ Cat = class Cat {
 // and instantiate as many Cat objects as there are in the name array
 // Cat objects are in an array...
 for (let i = 0; i < catNames.length; i++) {
-  // $('.catPicker').append(`<li class='catName'>${catNames[i]}</li>`);
-  constructedCats[i] = new Cat(catNames[i]);
-  $('.catNameList').append(`<li class='catName ${[i]}'>${constructedCats[i].name}</li>`);
+   $('.catPicker').append(`<li class='catName'>${catNames[i]}</li>`);
+  constructedCats.set(catNames[i], new Cat(catNames[i]));
 }
 
 
@@ -46,10 +45,11 @@ for (let i = 0; i < catNames.length; i++) {
 
 $('.catName').click(function(event) {
   let clickedCat = event.target;
-  let clickedCatNumber = clickedCat.classList[1];
+  let clickedCatName = clickedCat.innerHTML;
+  let catToBeDisplayed = constructedCats.get(clickedCatName)
   if (clickedCat.nodeName === 'LI') {
-    constructedCats[clickedCatNumber].display();
-    constructedCats[clickedCatNumber].updateClickCount();
+     catToBeDisplayed.display();
+     catToBeDisplayed.updateClickCount();
   }
 });
 
@@ -58,6 +58,7 @@ $('.catName').click(function(event) {
 
 
 
-$('.cat-container img').click(function(event) {
+$('.cat-container').click(function(event) {
+  console.log(event.target);
   });
 });
