@@ -7,14 +7,11 @@ const catNames = [
 ];
 
 let Cat = '';
+let constructedCats = [];
 
 //when DOM is ready:
 $(function() {
 
-//Create content for catPicker menu
-for (const catName of catNames) {
-  $('.catPicker').append(`<li class='catName'>${catName}</li>`);
-}
 
 Cat = class Cat {
   constructor(name) {
@@ -29,15 +26,24 @@ Cat = class Cat {
   }
 }
 
+// Loop over catNames array to create content for catPicker menu
+// and instantiate as many Cat objects as there are in the name array
+// Cat objects are in an array...
+for (let i = 0; i < catNames.length; i++) {
+  // $('.catPicker').append(`<li class='catName'>${catNames[i]}</li>`);
+  constructedCats[i] = new Cat(catNames[i]);
+  $('.catNameList').append(`<li class='catName ${[i]}'>${constructedCats[i].name}</li>`);
+}
 
 
 //event listener for menu clicks
 
 $('.catName').click(function(event) {
-  if (event.target.nodeName === 'LI') {
-    let displayedCat = new Cat($(this).text());
-    displayedCat.display();
-
+  let clickedCat = event.target;
+  let clickedCatNumber = clickedCat.classList[1];
+  if (clickedCat.nodeName === 'LI') {
+    console.log(clickedCat.classList[1]);
+    constructedCats[clickedCatNumber].display();
   }
 });
 
