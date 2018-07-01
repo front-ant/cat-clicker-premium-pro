@@ -16,13 +16,19 @@ $(function() {
 Cat = class Cat {
   constructor(name) {
   this.name = name;
+  this.clicked = 0;
   }
 
   display() {
     $('.cat-container').html(
       this.name +
-      `<img src='img\\${this.name}.jpg' height="300">`
+      `<img src='img\\${this.name}.jpg' height="300">` +
+      `Clicked ${this.clicked} times`
     );
+  }
+
+  updateClickCount() {
+    this.clicked += 1;
   }
 }
 
@@ -42,8 +48,8 @@ $('.catName').click(function(event) {
   let clickedCat = event.target;
   let clickedCatNumber = clickedCat.classList[1];
   if (clickedCat.nodeName === 'LI') {
-    console.log(clickedCat.classList[1]);
     constructedCats[clickedCatNumber].display();
+    constructedCats[clickedCatNumber].updateClickCount();
   }
 });
 
@@ -52,23 +58,6 @@ $('.catName').click(function(event) {
 
 
 
-
-$('.name').each(function(index) {
-    $(this).text(function() {
-      for (cat in cats) {
-        return cats[index].name;
-        index += 1;
-      }
-    });
+$('.cat-container img').click(function(event) {
   });
-
-
-$(".individual-cat").click(function(event) {
-  counter = $(this).find('.counter');
-  let counterValue = Number(counter.text());
-  counter.text(function() {
-    let newCounterValue = counterValue + 1;
-    return newCounterValue;
-  });
-});
 });
