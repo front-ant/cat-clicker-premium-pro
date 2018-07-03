@@ -1,11 +1,3 @@
-let catNames = [
-  'Tubbs',
-  'Peaches',
-  'Sapphire',
-  'Jeeves',
-  'Cafe'
-];
-
 class Cat {
   constructor(name) {
     this.name = name;
@@ -19,11 +11,22 @@ let constructedCats = new Map();
 $(function() {
 
 const model = {
+  catNames: [
+    'Tubbs',
+    'Peaches',
+    'Sapphire',
+    'Jeeves',
+    'Cafe'
+  ],
+
   constructCats: function() {
-    for (let i = 0; i < catNames.length; i++) {
-      constructedCats.set(catNames[i], new Cat(catNames[i]));
+    let cats = octopus.getCatList();
+    for (let i = 0; i < cats.length; i++) {
+      constructedCats.set(cats[i], new Cat(cats[i]));
     };
   },
+
+
   increaseCounter: function(cat) {
     cat.clicked += 1;
   }
@@ -31,8 +34,9 @@ const model = {
 
 const view1 = {
   init: function() {
-    for (let i = 0; i < catNames.length; i++) {
-       $('.catPicker').append(`<li class='catName'>${catNames[i]}</li>`);
+    let cats = octopus.getCatList();
+    for (let i = 0; i < cats.length; i++) {
+       $('.catPicker').append(`<li class='catName'>${cats[i]}</li>`);
      };
 
        $('.catName').click(function(event) {
@@ -66,6 +70,10 @@ const octopus = {
     model.constructCats();
     view1.init();
     view2.init();
+  },
+
+  getCatList: function() {
+    return model.catNames;
   },
 
   callActiveCat: function(cat) {
