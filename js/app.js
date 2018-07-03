@@ -6,80 +6,85 @@ let catNames = [
   'Cafe'
 ];
 
+class Cat {
+  constructor(name) {
+    this.name = name;
+    this.clicked = 0;
+  };
+};
+
 let constructedCats = new Map();
 
 //when DOM is ready:
 $(function() {
 
 const model = {
-  Cat: class Cat {
-    constructor(name) {
-      this.name = name;
-      this.clicked = 0;
-    };
-  },
-
   constructCats: function() {
     for (let i = 0; i < catNames.length; i++) {
       constructedCats.set(catNames[i], new Cat(catNames[i]));
     };
+  },
+  increaseCounter: function(cat) {
+    cat.clicked += 1;
   }
-
-
 };
 
 const view1 = {
-  display: function() {
+  init: function() {
     for (let i = 0; i < catNames.length; i++) {
        $('.catPicker').append(`<li class='catName'>${catNames[i]}</li>`);
+     };
+
+       $('.catName').click(function(event) {
+         let clickedCat = event.target;
+         let clickedCatName = clickedCat.innerHTML;
+         // grab active cat object. The variable is also used when
+         // the displayed cat picture is clicked later
+         octopus.callActiveCat(clickedCatName);
+         octopus.showCat(activeCat);
+       });
   }
-}
+
 };
 
 const view2 = {
-
+  render: function(cat) {
+    $('.cat-container').html(
+          cat.name +
+          `<img src='img\\${cat.name}.jpg' height="300">` +
+          `Click Count: ${cat.clicked}`);
+        },
+  init: function() {
+    $('.cat-container').click(function() {
+      octopus.updateCat(activeCat);
+    });
+  }
 };
 
 const octopus = {
   init: function() {
     model.constructCats();
-    view1.display();
+    view1.init();
+    view2.init();
+  },
+
+  callActiveCat: function(cat) {
+    activeCat = constructedCats.get(cat);
+    return activeCat;
+  },
+
+
+  updateCat: function(cat) {
+      model.increaseCounter(cat);
+      view2.render(cat);
+    },
+
+
+  showCat: function(cat) {
+    view2.render(cat);
   }
 };
 
-//
-//   display() {
-//     $('.cat-container').html(
-//       this.name +
-//       `<img src='img\\${this.name}.jpg' height="300">` +
-//       `Click Count: ${this.clicked}`
-//     );
-//   }
-//
-//   updateClickCount() {
-//     this.clicked += 1;
-//   }
-// }
-//
-//
-// //event listener for menu clicks
-//
-// $('.catName').click(function(event) {
-//   let clickedCat = event.target;
-//   let clickedCatName = clickedCat.innerHTML;
-//   // grab active cat object. The variable is also used when
-//   // the displayed cat picture is clicked later
-//   catToBeDisplayed = constructedCats.get(clickedCatName)
-//   if (clickedCat.nodeName === 'LI') {
-//      catToBeDisplayed.display();
-//      catToBeDisplayed.updateClickCount(); // maybe not necessary
-//   }
-// });
-//
-// $('.cat-container').click(function(event) {
-//   catToBeDisplayed.display();
-//   catToBeDisplayed.updateClickCount()
-//   });
 
 octopus.init();
 
