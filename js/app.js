@@ -30,6 +30,12 @@ const model = {
 
   increaseCounter: function(cat) {
     cat.clicked += 1;
+  },
+
+  updateCatFeatures: function(obj, name, url, clicked) {
+    obj.name = name;
+    obj.url = url;
+    obj.clicked = clicked;
   }
 };
 
@@ -63,10 +69,10 @@ const view2 = {
             '<form>' +
               '<fieldset>' +
                 '<legend>Cat Details</legend>' +
-                `<input type="text" name="name" value=${cat.name}>` +
-                `<input type="url" name="imgsrc" value=${cat.name}>` +
-                '<input type="number" name="clicks">' +
-                '<input type="submit" value="Save" id="save">' +
+                `<input type="text" id="admin-name" value=${cat.name}>` +
+                `<input type="text" id="admin-src" value=${cat.url}>` +
+                `<input type="number" id="admin-clicks" value=${cat.clicked}>` +
+                '<button id="save">Save</button>' +
                 '<button id="abort">Cancel</button>' +
               '</fieldset>' +
             '</form>' +
@@ -80,6 +86,7 @@ const view2 = {
         e.preventDefault();
       });
       $('#save').click(function(e) {
+        octopus.changeCatInfo(activeCat);
         e.preventDefault();
       })
         },
@@ -113,6 +120,14 @@ const octopus = {
       model.increaseCounter(cat);
       view2.render(cat);
     },
+
+  changeCatInfo: function(cat) {
+    let newCatName = $('#admin-name').val();
+    let newCatSrc = $('#admin-src').val();
+    let newCatClickNumber = $('#admin-clicks').val();
+    model.updateCatFeatures(cat, newCatName, newCatSrc, newCatClickNumber);
+    view2.render(cat);
+  },
 
 
   showCat: function(cat) {
