@@ -1,27 +1,21 @@
 main {
   display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .cat-container {
   display: block;
-  width: 80%;
+  width: 60%;
 }
 
-.catPicker {
-  width: 20%;
+.admin-button {
+  float: inline-right;
+  margin-left: 3em;
 }
 
-.counter {
-  width: 50%;
-  margin: auto;
-}
 
 .cat-image {
   margin: auto;
-}
-
-.individual-cat {
-  display: flex;
-  flex-wrap: wrap;
-
 }

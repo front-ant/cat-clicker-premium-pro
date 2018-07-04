@@ -56,7 +56,21 @@ const view2 = {
     $('.cat-container').html(
           cat.name +
           `<img src='img\\${cat.name}.jpg' height="300">` +
-          `Click Count: ${cat.clicked}`);
+          `Click Count: ${cat.clicked}` +
+          '<button class="admin-button">Admin</button>' +
+          '<div class="admin-area">' +
+            '<form>' +
+              '<fieldset>' +
+                '<legend>Cat Details</legend>' +
+                '<input type="text" name="name">' +
+                '<input type="url" name="imgsrc">' +
+                '<input type="number" name="clicks">' +
+                '<input type="submit" value="Save">' +
+                '<button id="abort">Cancel</button>' +
+              '</fieldset>' +
+            '</form>' +
+          '</div>'
+);
         },
   init: function() {
     $('.cat-container').click(function() {
