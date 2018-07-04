@@ -1,7 +1,8 @@
 class Cat {
-  constructor(name) {
+  constructor(name, url) {
     this.name = name;
     this.clicked = 0;
+    this.url = url;
   };
 };
 
@@ -22,7 +23,7 @@ const model = {
   constructCats: function() {
     let cats = octopus.getCatList();
     for (let i = 0; i < cats.length; i++) {
-      constructedCats.set(cats[i], new Cat(cats[i]));
+      constructedCats.set(cats[i], new Cat(cats[i], `img\\${cats[i]}.jpg`));
     };
   },
 
@@ -55,15 +56,15 @@ const view2 = {
   render: function(cat) {
     $('.cat-container').html(
           cat.name +
-          `<img src='img\\${cat.name}.jpg' height="300">` +
+          `<img src=${cat.url} height="300">` +
           `Click Count: ${cat.clicked}` +
           '<button class="admin-button">Admin</button>' +
           '<div class="admin-area hidden">' +
             '<form>' +
               '<fieldset>' +
                 '<legend>Cat Details</legend>' +
-                '<input type="text" name="name">' +
-                '<input type="url" name="imgsrc">' +
+                `<input type="text" name="name" value=${cat.name}>` +
+                `<input type="url" name="imgsrc" value=${cat.name}>` +
                 '<input type="number" name="clicks">' +
                 '<input type="submit" value="Save" id="save">' +
                 '<button id="abort">Cancel</button>' +
