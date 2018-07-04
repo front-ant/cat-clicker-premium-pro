@@ -78,7 +78,7 @@ const view2 = {
             '</form>' +
           '</div>');
       $('.admin-button').click(function(e) {
-        $('.admin-area').removeClass('hidden');
+        $('.admin-area').toggle('hidden');
         e.preventDefault();
       });
       $('#abort').click(function(e) {
@@ -124,9 +124,13 @@ const octopus = {
   changeCatInfo: function(cat) {
     let newCatName = $('#admin-name').val();
     let newCatSrc = $('#admin-src').val();
-    let newCatClickNumber = $('#admin-clicks').val();
-    model.updateCatFeatures(cat, newCatName, newCatSrc, newCatClickNumber);
-    view2.render(cat);
+    let newCatClickNumber = parseInt($('#admin-clicks').val());
+    if ((newCatName != cat.name) || (newCatSrc != cat.url) || (newCatClickNumber != cat.clicked)) {
+      model.updateCatFeatures(cat, newCatName, newCatSrc, newCatClickNumber);
+      view2.render(cat);
+      $('.admin-area').removeClass('hidden');
+
+    };
   },
 
 
