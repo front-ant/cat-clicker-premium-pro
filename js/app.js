@@ -65,14 +65,22 @@ const view2 = {
                 '<input type="text" name="name">' +
                 '<input type="url" name="imgsrc">' +
                 '<input type="number" name="clicks">' +
-                '<input type="submit" value="Save">' +
+                '<input type="submit" value="Save" id="save">' +
                 '<button id="abort">Cancel</button>' +
               '</fieldset>' +
             '</form>' +
           '</div>');
-      $('.admin-button').click(function() {
+      $('.admin-button').click(function(e) {
         $('.admin-area').removeClass('hidden');
+        e.preventDefault();
       });
+      $('#abort').click(function(e) {
+        $('.admin-area').addClass('hidden');
+        e.preventDefault();
+      });
+      $('#save').click(function(e) {
+        e.preventDefault();
+      })
         },
   init: function() {
     $('.cat-container').click(function() {
