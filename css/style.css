@@ -19,3 +19,6 @@ main {
 .cat-image {
   margin: auto;
 }
+.admin-area.hidden {
+  display: none;
+}

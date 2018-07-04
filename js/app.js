@@ -58,7 +58,7 @@ const view2 = {
           `<img src='img\\${cat.name}.jpg' height="300">` +
           `Click Count: ${cat.clicked}` +
           '<button class="admin-button">Admin</button>' +
-          '<div class="admin-area">' +
+          '<div class="admin-area hidden">' +
             '<form>' +
               '<fieldset>' +
                 '<legend>Cat Details</legend>' +
@@ -69,12 +69,16 @@ const view2 = {
                 '<button id="abort">Cancel</button>' +
               '</fieldset>' +
             '</form>' +
-          '</div>'
-);
+          '</div>');
+      $('.admin-button').click(function() {
+        $('.admin-area').removeClass('hidden');
+      });
         },
   init: function() {
     $('.cat-container').click(function() {
+      if (event.target.nodeName === 'IMG') {
       octopus.updateCat(activeCat);
+    };
     });
   }
 };
